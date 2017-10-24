@@ -33,7 +33,7 @@ package org.scijava.io.location.bzip2;
 
 import java.io.IOException;
 
-import org.scijava.io.DataHandle;
+import org.scijava.io.handle.DataHandle;
 import org.scijava.io.location.AbstractCompressedHandle;
 import org.scijava.plugin.Plugin;
 
@@ -59,6 +59,12 @@ public class BZip2Handle extends AbstractCompressedHandle<BZip2Location> {
 	@Override
 	public Class<BZip2Location> getType() {
 		return BZip2Location.class;
+	}
+
+	@Override
+	public boolean exists() throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -36,7 +36,8 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 
 import org.junit.Test;
-import org.scijava.io.location.file.FileLocation;
+import org.scijava.io.location.FileLocation;
+import org.scijava.io.location.Location;
 import org.scijava.io.location.zip.ZipLocation;
 
 /**

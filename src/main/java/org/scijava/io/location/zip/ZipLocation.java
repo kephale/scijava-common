@@ -33,9 +33,9 @@ package org.scijava.io.location.zip;
 
 import java.util.zip.ZipEntry;
 
-import org.scijava.io.DataHandle;
-import org.scijava.io.Location;
+import org.scijava.io.handle.DataHandle;
 import org.scijava.io.location.AbstractHigherOrderLocation;
+import org.scijava.io.location.Location;
 import org.scijava.plugin.Plugin;
 
 /**

@@ -56,8 +56,8 @@ package org.scijava.io.location.bzip2;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.scijava.io.DataHandle;
-import org.scijava.io.Location;
+import org.scijava.io.handle.DataHandle;
+import org.scijava.io.location.Location;
 import org.scijava.log.LogService;
 
 /**

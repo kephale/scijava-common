@@ -35,9 +35,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.scijava.io.DataHandle;
-import org.scijava.io.DataHandleService;
-import org.scijava.io.Location;
+import org.scijava.io.handle.AbstractStreamHandle;
+import org.scijava.io.handle.DataHandle;
+import org.scijava.io.handle.DataHandleService;
+import org.scijava.io.handle.ResettableStreamHandle;
 import org.scijava.plugin.Parameter;
 
 /**

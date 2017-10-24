@@ -36,7 +36,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.GZIPOutputStream;
 
-import org.scijava.io.location.file.FileLocation;
+import org.scijava.io.handle.DataHandle;
+import org.scijava.io.handle.DataHandleTest;
+import org.scijava.io.location.FileLocation;
+import org.scijava.io.location.Location;
 import org.scijava.io.location.gzip.GZipHandle;
 import org.scijava.io.location.gzip.GZipLocation;
 

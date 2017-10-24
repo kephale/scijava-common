@@ -105,7 +105,7 @@ public class DefaultBufferedStreamHandle<L extends Location> extends
 	}
 
 	private long maxBuf() throws IOException {
-		return getBufferIfOpen().getMaxPos();
+		return getBufferIfOpen().size();
 	}
 
 	@Override
@@ -230,5 +230,10 @@ public class DefaultBufferedStreamHandle<L extends Location> extends
 			buffer = new ByteArrayByteBank();
 		}
 		return buffer;
+	}
+
+	@Override
+	public boolean exists() throws IOException {
+		return false;
 	}
 }

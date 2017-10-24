@@ -37,7 +37,10 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.scijava.io.location.file.FileLocation;
+import org.scijava.io.handle.DataHandle;
+import org.scijava.io.handle.DataHandleTest;
+import org.scijava.io.location.FileLocation;
+import org.scijava.io.location.Location;
 import org.scijava.io.location.zip.ZipHandle;
 import org.scijava.io.location.zip.ZipLocation;
 

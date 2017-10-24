@@ -35,12 +35,12 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.scijava.io.DataHandle;
-import org.scijava.io.DataHandleInputStream;
-import org.scijava.io.Location;
+import org.scijava.io.handle.DataHandle;
+import org.scijava.io.handle.DataHandleInputStream;
+import org.scijava.io.handle.ResettableStreamHandle;
+import org.scijava.io.handle.StreamHandle;
 import org.scijava.io.location.AbstractCompressedHandle;
-import org.scijava.io.location.ResettableStreamHandle;
-import org.scijava.io.location.StreamHandle;
+import org.scijava.io.location.Location;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -201,5 +201,11 @@ public class ZipHandle extends AbstractCompressedHandle<ZipLocation> {
 			}
 			resetStream();
 		}
+	}
+
+	@Override
+	public boolean exists() throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

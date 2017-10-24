@@ -35,9 +35,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.scijava.io.handle.DataHandle;
+import org.scijava.io.handle.DataHandleTest;
+import org.scijava.io.location.FileLocation;
+import org.scijava.io.location.Location;
 import org.scijava.io.location.bzip2.BZip2Handle;
 import org.scijava.io.location.bzip2.BZip2Location;
-import org.scijava.io.location.file.FileLocation;
 
 /**
  * Tests {@link BZip2Handle}.

@@ -33,8 +33,8 @@ package org.scijava.io.location.gzip;
 import java.io.IOException;
 import java.util.zip.GZIPInputStream;
 
-import org.scijava.io.DataHandle;
-import org.scijava.io.DataHandleInputStream;
+import org.scijava.io.handle.DataHandle;
+import org.scijava.io.handle.DataHandleInputStream;
 import org.scijava.io.location.AbstractCompressedHandle;
 import org.scijava.plugin.Plugin;
 
@@ -56,6 +56,12 @@ public class GZipHandle extends AbstractCompressedHandle<GZipLocation> {
 	@Override
 	protected void initInputStream() throws IOException {
 		inputStream = new GZIPInputStream(new DataHandleInputStream<>(raw()));
+	}
+
+	@Override
+	public boolean exists() throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 //	@Override

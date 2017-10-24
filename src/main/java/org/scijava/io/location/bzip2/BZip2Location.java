@@ -1,9 +1,9 @@
 
 package org.scijava.io.location.bzip2;
 
-import org.scijava.io.DataHandle;
-import org.scijava.io.Location;
+import org.scijava.io.handle.DataHandle;
 import org.scijava.io.location.AbstractHigherOrderLocation;
+import org.scijava.io.location.Location;
 
 /**
  * {@link Location} backed by a {@link DataHandle} that is BZip2 compressed.
