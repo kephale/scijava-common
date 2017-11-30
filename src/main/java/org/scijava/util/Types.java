@@ -769,23 +769,35 @@ public final class Types {
 		if (src.length != dest.length) {
 			throw new IllegalArgumentException("src and dest lengths differ");
 		}
-		for (int i = 0; i < src.length; i++) {
-			if (dest[i] instanceof Class) {
-				final Class<?> classDest = (Class<?>) dest[i];
-				Optional<Class<?>> first = Types.raws(src[i]).stream().filter(
-					raw -> classDest.isAssignableFrom(raw)).findFirst();
-				if (!first.isPresent()) return false;
+		for (int i = 0; i < dest.length; i++) {
+			// First, check raw type assignability.
+			final List<Class<?>> srcClasses = Types.raws(src[i]);
+			final List<Class<?>> destClasses = Types.raws(dest[i]);
+			for (final Class<?> destClass : destClasses) {
+				final Optional<Class<?>> first = srcClasses.stream().filter(
+					srcClass -> destClass.isAssignableFrom(srcClass)).findFirst();
+				if (!first.isPresent()) {
+					throw new IllegalArgumentException("Argument #" + i + //
+						" (" + Types.name(src[i]) + ") is not assignable to " + //
+						"destination type (" + Types.name(dest[i]) + ")");
+				}
 			}
-			else if (dest[i] instanceof ParameterizedType) {
+
+			if (dest[i] instanceof ParameterizedType) {
 				final ParameterizedType pTypeDest = (ParameterizedType) dest[i];
 				// TODO
 			}
 			else if (dest[i] instanceof TypeVariable) {
 				final TypeVariable<?> typeVarDest = (TypeVariable<?>) dest[i];
-				// TODO
+				final Type[] upperBounds = typeVarDest.getBounds();
+				for (final Type upperBound : upperBounds) {
+					if (!)
+				}
 			}
 			else if (dest[i] instanceof WildcardType) {
 				final WildcardType wildcardDest = (WildcardType) dest[i];
+				final Type[] upperBounds = wildcardDest.getUpperBounds();
+				final Type[] lowerBounds = wildcardDest.getLowerBounds();
 				// TODO
 			}
 			else if (dest[i] instanceof GenericArrayType) {
