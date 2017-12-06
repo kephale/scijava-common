@@ -570,10 +570,28 @@ public class TypesTest {
 		final Type[] srcMiss = { String.class, Integer.class };
 		assertFalse(Types.satisfies(srcMiss, dest));
 	}
+	public <T extends Number> void go(T i1, T i2) {
+		System.out.println("i1 = " + i1 + ", i2 = " + i2);
+	}
+	public void goo() {
+		Double d = 5.2;
+		Integer i = 3;
+		go(d, i);
+	}
+	public <T extends Number> void goList(List<T> i1, List<T> i2) {
+		System.out.println("i1 = " + i1 + ", i2 = " + i2);
+	}
+	public void gooList() {
+		List<Double> d = java.util.Arrays.asList(5.2);
+		List<Integer> i = java.util.Arrays.asList(3);
+		goList(d, i);
+	}
 
 	/** Tests {@link Types#satisfies(Type[], Type[])} for single arguments. */
 	@Test
-	public <T extends Number, U extends BigInteger> void testSatisfiesSingle() {
+	public <T extends Number, U extends BigInteger, V extends T, W> void
+		testSatisfiesSingle()
+	{
 		// <T extends Number> f(T)
 		final Type t = new Nil<T>() {}.getType();
 		final Type u = new Nil<U>() {}.getType();
@@ -584,6 +602,26 @@ public class TypesTest {
 		assertTrue(Types.satisfies(new Type[] { t }, tDest));
 		assertTrue(Types.satisfies(new Type[] { u }, tDest));
 		assertFalse(Types.satisfies(new Type[] { String.class }, tDest));
+
+		final Type listT = new Nil<List<T>>() {}.getType();
+		final Type listU = new Nil<List<U>>() {}.getType();
+		final Type listNumber = new Nil<List<Number>>() {}.getType();
+		final Type listDouble = new Nil<List<Double>>() {}.getType();
+		final Type listBigInteger = new Nil<List<BigInteger>>() {}.getType();
+		final Type listSuperNumber = new Nil<List<? super Number>>() {}.getType();
+		final Type listExtendsNumber = new Nil<List<? extends Number>>() {}.getType();
+		final Type listExtendsDouble = new Nil<List<? extends Double>>() {}.getType();
+
+		// <T extends Number> f(List<T>)
+		final Type[] listTDest = { listT };
+		// f(List<? super Number>)
+		final Type[] listSuperNumberDest = { listSuperNumber };
+		// f(List<? extends Number>)
+		final Type[] listExtendsNumberDest = { listExtendsNumber };
+
+		assertTrue(Types.satisfies(new Type[] { listT }, listTDest));
+		assertTrue(Types.satisfies(new Type[] { listT }, listTDest));
+		assertFalse(Types.satisfies(new Type[] { listU }, listTDest));
 	}
 
 	/**

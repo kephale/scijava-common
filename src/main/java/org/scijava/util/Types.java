@@ -777,9 +777,10 @@ public final class Types {
 				final Optional<Class<?>> first = srcClasses.stream().filter(
 					srcClass -> destClass.isAssignableFrom(srcClass)).findFirst();
 				if (!first.isPresent()) {
-					throw new IllegalArgumentException("Argument #" + i + //
-						" (" + Types.name(src[i]) + ") is not assignable to " + //
-						"destination type (" + Types.name(dest[i]) + ")");
+//					throw new IllegalArgumentException("Argument #" + i + //
+//						" (" + Types.name(src[i]) + ") is not assignable to " + //
+//						"destination type (" + Types.name(dest[i]) + ")");
+					return false;
 				}
 			}
 
@@ -791,7 +792,6 @@ public final class Types {
 				final TypeVariable<?> typeVarDest = (TypeVariable<?>) dest[i];
 				final Type[] upperBounds = typeVarDest.getBounds();
 				for (final Type upperBound : upperBounds) {
-					if (!)
 				}
 			}
 			else if (dest[i] instanceof WildcardType) {
