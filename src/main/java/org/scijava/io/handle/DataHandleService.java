@@ -32,6 +32,8 @@
 
 package org.scijava.io.handle;
 
+import java.util.Objects;
+
 import org.scijava.io.IOService;
 import org.scijava.io.location.Location;
 import org.scijava.plugin.WrapperService;
@@ -62,5 +64,52 @@ public interface DataHandleService extends
 	@Override
 	default Class<Location> getType() {
 		return Location.class;
+	}
+
+	/**
+	 * Wraps the provided {@link DataHandle} in a read-only buffer for accelerated
+	 * reading.
+	 *
+	 * @param handle the handle to wrap
+	 * @see ReadBufferDataHandle#ReadBufferDataHandle(DataHandle)
+	 */
+	default DataHandle<Location> readBuffer(final DataHandle<Location> handle) {
+		Objects.nonNull(handle);
+		return new ReadBufferDataHandle(handle);
+	}
+
+	/**
+	 * Creates a {@link DataHandle} on the provided {@link Location} wrapped in a
+	 * read-only buffer for accelerated reading.
+	 *
+	 * @param location the handle to wrap
+	 * @see ReadBufferDataHandle#ReadBufferDataHandle(DataHandle)
+	 */
+	default DataHandle<Location> readBuffer(final Location location) {
+		final DataHandle<Location> handle = create(location);
+		return handle == null ? null : new ReadBufferDataHandle(handle);
+	}
+
+	/**
+	 * Creates a {@link DataHandle} on the provided {@link Location} wrapped in a
+	 * write-only buffer for accelerated writing.
+	 *
+	 * @param location the handle to wrap
+	 */
+	default DataHandle<Location> writeBuffer(final Location location) {
+		final DataHandle<Location> handle = create(location);
+		return handle == null ? null : new WriteBufferDataHandle(handle);
+	}
+
+	/**
+	 * Wraps the provided {@link DataHandle} in a write-only buffer for
+	 * accelerated writing.
+	 *
+	 * @param handle the handle to wrap
+	 * @see WriteBufferDataHandle#WriteBufferDataHandle(DataHandle)
+	 */
+	default DataHandle<Location> writeBuffer(final DataHandle<Location> handle) {
+		Objects.nonNull(handle);
+		return new WriteBufferDataHandle(handle);
 	}
 }
