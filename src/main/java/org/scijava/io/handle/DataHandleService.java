@@ -87,7 +87,8 @@ public interface DataHandleService extends
 	 * @see ReadBufferDataHandle#ReadBufferDataHandle(DataHandle)
 	 */
 	default DataHandle<Location> readBuffer(final Location location) {
-		return new ReadBufferDataHandle(create(location));
+		final DataHandle<Location> handle = create(location);
+		return handle == null ? null : new ReadBufferDataHandle(handle);
 	}
 
 	/**
@@ -97,7 +98,8 @@ public interface DataHandleService extends
 	 * @param location the handle to wrap
 	 */
 	default DataHandle<Location> writeBuffer(final Location location) {
-		return new WriteBufferDataHandle(create(location));
+		final DataHandle<Location> handle = create(location);
+		return handle == null ? null : new WriteBufferDataHandle(create(location));
 	}
 
 	/**
@@ -115,14 +117,14 @@ public interface DataHandleService extends
 	/**
 	 * Convenience method to test whether it describes an existing file.
 	 *
-	 * @param Location the location to test
+	 * @param location the location to test
 	 * @return The result of {@link DataHandle#exists()} on a newly created handle
 	 *         on this location
 	 * @throws IOException
 	 */
-	default boolean handleExists(Location Location) throws IOException {
-		try (DataHandle<Location> handle = create(Location)) {
-			return handle.exists();
+	default boolean handleExists(final Location location) throws IOException {
+		try (DataHandle<Location> handle = create(location)) {
+			return handle == null || handle.exists();
 		}
 	}
 }
