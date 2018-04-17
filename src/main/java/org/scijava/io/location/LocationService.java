@@ -58,17 +58,15 @@ public interface LocationService extends HandlerService<URI, LocationResolver>,
 	 * @throws URISyntaxException if the URI is malformed
 	 */
 	default Location resolve(final String uriString) throws URISyntaxException {
-		try {
-			return resolve(new URI(uriString));
-		}
-		catch (URISyntaxException ex) {
+		URI uri = new URI(uriString);
+		if (uri.getScheme() == null) {
 			// Fall-back: we try to create a FileLocation,
 			// in case the user passed a path instead of an URI.
 			if (new File(uriString).exists()) {
 				return new FileLocation(uriString);
 			}
-			throw ex;
 		}
+		return resolve(uri);
 	}
 
 	/**
