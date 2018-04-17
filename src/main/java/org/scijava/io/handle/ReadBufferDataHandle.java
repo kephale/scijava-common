@@ -184,7 +184,11 @@ public class ReadBufferDataHandle extends AbstractHigherOrderHandle<Location> {
 	}
 
 	@Override
-	public int read(final byte[] b, final int targetOffset, final int len) throws IOException {
+	public int read(final byte[] b, final int targetOffset, final int len)
+		throws IOException
+	{
+		if (len == 0) return 0;
+
 		// the last position we will read
 		final long endPos = offset + len;
 
@@ -212,7 +216,8 @@ public class ReadBufferDataHandle extends AbstractHigherOrderHandle<Location> {
 			offset += localLength;
 			localTargetOff += localLength;
 		}
-		return read;
+		// return -1 if we tried to read at least one byte but failed
+		return read != 0 ? read : -1;
 	}
 
 	@Override
